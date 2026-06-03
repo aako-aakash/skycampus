@@ -1,0 +1,17 @@
+{
+  "name": "skycampus",
+  "version": "1.0.0",
+  "description": "SkyCampus — AI-Powered University Social Network",
+  "private": true,
+  "scripts": {
+    "dev:backend":  "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:ai":       "cd ai-service && uvicorn main:app --reload --port 8000",
+    "install:all":  "cd backend && npm install && cd ../frontend && npm install",
+    "db:setup":     "cd backend && npx prisma migrate dev --name init && npx prisma db seed",
+    "db:seed":      "cd backend && npm run db:seed",
+    "docker:up":    "docker-compose up --build",
+    "docker:down":  "docker-compose down",
+    "test":         "cd backend && npm test"
+  }
+}

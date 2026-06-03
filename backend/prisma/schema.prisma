@@ -1,0 +1,222 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(uuid())
+  email           String    @unique
+  username        String    @unique
+  password        String
+  name            String
+  bio             String?
+  university      String?
+  branch          String?
+  year            Int?
+  skills          String[]
+  interests       String[]
+  profilePicture  String?
+  coverImage      String?
+  socialLinks     Json?
+  refreshToken    String?
+  isVerified      Boolean   @default(false)
+  posts           Post[]
+  comments        Comment[]
+  likes           Like[]
+  followers       Follow[]  @relation("Following")
+  following       Follow[]  @relation("Follower")
+  sentMessages    Message[]
+  notifications   Notification[]  @relation("NotifReceiver")
+  actedNotifs     Notification[]  @relation("NotifActor")
+  communities     CommunityMember[]
+  createdCommunities Community[]
+  chatParticipants ChatParticipant[]
+  resumes         Resume[]
+  aiRecs          AiRecommendation[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([email])
+  @@index([username])
+  @@index([university])
+}
+
+model Post {
+  id            String      @id @default(uuid())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content       String
+  imageUrl      String?
+  tags          String[]
+  likesCount    Int         @default(0)
+  commentsCount Int         @default(0)
+  visibility    Visibility  @default(PUBLIC)
+  comments      Comment[]
+  likes         Like[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([userId])
+  @@index([createdAt(sort: Desc)])
+  @@index([tags])
+}
+
+model Comment {
+  id        String    @id @default(uuid())
+  postId    String
+  userId    String
+  parentId  String?
+  content   String
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent    Comment?  @relation("Replies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("Replies")
+  createdAt DateTime  @default(now())
+
+  @@index([postId])
+  @@index([userId])
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  userId    String
+  postId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
+  @@index([postId])
+}
+
+model Follow {
+  id          String   @id @default(uuid())
+  followerId  String
+  followingId String
+  follower    User     @relation("Follower",  fields: [followerId],  references: [id], onDelete: Cascade)
+  following   User     @relation("Following", fields: [followingId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+}
+
+model Community {
+  id          String    @id @default(uuid())
+  creatorId   String
+  creator     User      @relation(fields: [creatorId], references: [id])
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  avatar      String?
+  coverImage  String?
+  isPrivate   Boolean   @default(false)
+  memberCount Int       @default(0)
+  tags        String[]
+  members     CommunityMember[]
+  createdAt   DateTime  @default(now())
+
+  @@index([slug])
+  @@index([tags])
+}
+
+model CommunityMember {
+  id          String    @id @default(uuid())
+  userId      String
+  communityId String
+  role        MemberRole @default(MEMBER)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  community   Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
+  joinedAt    DateTime  @default(now())
+
+  @@unique([userId, communityId])
+}
+
+model Chat {
+  id           String    @id @default(uuid())
+  isGroup      Boolean   @default(false)
+  name         String?
+  avatar       String?
+  participants ChatParticipant[]
+  messages     Message[]
+  lastMessage  String?
+  lastMessageAt DateTime?
+  createdAt    DateTime  @default(now())
+}
+
+model ChatParticipant {
+  id       String @id @default(uuid())
+  chatId   String
+  userId   String
+  chat     Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([chatId, userId])
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  chatId    String
+  senderId  String
+  content   String
+  mediaUrl  String?
+  seenBy    String[]
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  sender    User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([chatId])
+  @@index([createdAt])
+}
+
+model Notification {
+  id         String           @id @default(uuid())
+  userId     String
+  actorId    String
+  type       NotificationType
+  resourceId String?
+  message    String?
+  isRead     Boolean          @default(false)
+  user       User             @relation("NotifReceiver", fields: [userId],  references: [id], onDelete: Cascade)
+  actor      User             @relation("NotifActor",    fields: [actorId], references: [id], onDelete: Cascade)
+  createdAt  DateTime         @default(now())
+
+  @@index([userId, isRead])
+  @@index([createdAt(sort: Desc)])
+}
+
+model Resume {
+  id         String   @id @default(uuid())
+  userId     String
+  fileUrl    String
+  fileName   String
+  analysis   Json?
+  skills     String[]
+  score      Float?
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+}
+
+model AiRecommendation {
+  id         String   @id @default(uuid())
+  userId     String
+  type       RecoType
+  targetId   String
+  score      Float
+  reason     String?
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId, type])
+}
+
+enum Visibility     { PUBLIC PRIVATE CONNECTIONS }
+enum MemberRole     { ADMIN MODERATOR MEMBER }
+enum NotificationType { LIKE COMMENT FOLLOW MENTION COMMUNITY }
+enum RecoType       { USER POST COMMUNITY }
