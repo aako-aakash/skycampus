@@ -547,6 +547,16 @@ Free to use, modify, and distribute for personal and commercial projects. Attrib
 
 ---
 
+## 👨‍💻 Author
+
+**Akash Kumar Saw**
+
+AI & Machine Learning Enthusiast | Software Engineer
+
+[![LinkedIn]](https://www.linkedin.com/in/akash-kumar-saw-bb1630258/)
+
+Feel free to connect with me on LinkedIn and explore my other projects.
+
 <br />
 
 <div align="center">
@@ -569,19 +579,11 @@ Next.js  ·  Node.js  ·  PostgreSQL  ·  Redis  ·  Socket.IO  ·  FastAPI  · 
 
 <br />
 
-[![GitHub stars](https://img.shields.io/github/stars/yourname/skycampus?style=social)](https://github.com/yourname/skycampus)
-[![GitHub forks](https://img.shields.io/github/forks/yourname/skycampus?style=social)](https://github.com/yourname/skycampus/fork)
+[![GitHub stars](https://img.shields.io/github/stars/aako-aakash/skycampus?style=social)](https://github.com/aako-aakash/skycampus)
+[![GitHub forks](https://img.shields.io/github/forks/aako-aakash/skycampus?style=social)](https://github.com/yourname/skycampus/fork)
 
 </div>
 
 
 
-## 👨‍💻 Author
 
-**Akash Kumar Saw**
-
-AI & Machine Learning Enthusiast | Software Engineer
-
-[![LinkedIn]](https://www.linkedin.com/in/akash-kumar-saw-bb1630258/)
-
-Feel free to connect with me on LinkedIn and explore my other projects.
