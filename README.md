@@ -580,7 +580,7 @@ Next.js  ·  Node.js  ·  PostgreSQL  ·  Redis  ·  Socket.IO  ·  FastAPI  · 
 <br />
 
 [![GitHub stars](https://img.shields.io/github/stars/aako-aakash/skycampus?style=social)](https://github.com/aako-aakash/skycampus)
-[![GitHub forks](https://img.shields.io/github/forks/aako-aakash/skycampus?style=social)](https://github.com/yourname/skycampus/fork)
+[![GitHub forks](https://img.shields.io/github/forks/aako-aakash/skycampus?style=social)](https://github.com/aako-aakash/skycampus/fork)
 
 </div>
 
