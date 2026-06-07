@@ -1,92 +1,16 @@
 <div align="center">
 
-<!-- HERO BANNER SVG LOGO -->
-<svg width="900" height="200" viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0a0f1e"/>
-      <stop offset="100%" style="stop-color:#0d1b3e"/>
-    </linearGradient>
-    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#38bdf8"/>
-      <stop offset="50%" style="stop-color:#818cf8"/>
-      <stop offset="100%" style="stop-color:#c084fc"/>
-    </linearGradient>
-    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:0"/>
-      <stop offset="50%" style="stop-color:#818cf8;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#c084fc;stop-opacity:0"/>
-    </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="softglow">
-      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
-      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <!-- Background -->
-  <rect width="900" height="200" rx="16" fill="url(#bgGrad)"/>
-  <!-- Grid lines -->
-  <g opacity="0.06" stroke="#38bdf8" stroke-width="0.5">
-    <line x1="0" y1="40" x2="900" y2="40"/>
-    <line x1="0" y1="80" x2="900" y2="80"/>
-    <line x1="0" y1="120" x2="900" y2="120"/>
-    <line x1="0" y1="160" x2="900" y2="160"/>
-    <line x1="100" y1="0" x2="100" y2="200"/>
-    <line x1="200" y1="0" x2="200" y2="200"/>
-    <line x1="300" y1="0" x2="300" y2="200"/>
-    <line x1="400" y1="0" x2="400" y2="200"/>
-    <line x1="500" y1="0" x2="500" y2="200"/>
-    <line x1="600" y1="0" x2="600" y2="200"/>
-    <line x1="700" y1="0" x2="700" y2="200"/>
-    <line x1="800" y1="0" x2="800" y2="200"/>
-  </g>
-  <!-- Glowing orbs -->
-  <circle cx="120" cy="100" r="60" fill="#38bdf8" opacity="0.04" filter="url(#softglow)"/>
-  <circle cx="780" cy="100" r="60" fill="#c084fc" opacity="0.04" filter="url(#softglow)"/>
-  <circle cx="450" cy="100" r="80" fill="#818cf8" opacity="0.03" filter="url(#softglow)"/>
-  <!-- Decorative dots -->
-  <circle cx="50" cy="50" r="2" fill="#38bdf8" opacity="0.6" filter="url(#glow)"/>
-  <circle cx="850" cy="50" r="2" fill="#c084fc" opacity="0.6" filter="url(#glow)"/>
-  <circle cx="50" cy="150" r="2" fill="#c084fc" opacity="0.6" filter="url(#glow)"/>
-  <circle cx="850" cy="150" r="2" fill="#38bdf8" opacity="0.6" filter="url(#glow)"/>
-  <circle cx="150" cy="30" r="1.5" fill="#818cf8" opacity="0.8"/>
-  <circle cx="750" cy="170" r="1.5" fill="#818cf8" opacity="0.8"/>
-  <circle cx="300" cy="170" r="1.5" fill="#38bdf8" opacity="0.5"/>
-  <circle cx="620" cy="30" r="1.5" fill="#c084fc" opacity="0.5"/>
-  <!-- Corner brackets -->
-  <g stroke="#38bdf8" stroke-width="1.5" fill="none" opacity="0.5">
-    <path d="M 20 20 L 20 10 L 30 10"/>
-    <path d="M 870 10 L 880 10 L 880 20"/>
-    <path d="M 20 180 L 20 190 L 30 190"/>
-    <path d="M 870 190 L 880 190 L 880 180"/>
-  </g>
-  <!-- Top separator line -->
-  <rect x="200" y="68" width="500" height="1" fill="url(#lineGrad)" opacity="0.4"/>
-  <!-- Main title -->
-  <text x="450" y="115" font-family="'Courier New', monospace" font-size="58" font-weight="900"
-    text-anchor="middle" fill="url(#textGrad)" filter="url(#glow)" letter-spacing="8">
-    SKYCAMPUS
-  </text>
-  <!-- Subtitle -->
-  <text x="450" y="148" font-family="'Courier New', monospace" font-size="13"
-    text-anchor="middle" fill="#94a3b8" letter-spacing="5">
-    YOUR UNIVERSITY · YOUR NETWORK · POWERED BY AI
-  </text>
-  <!-- Bottom separator line -->
-  <rect x="200" y="162" width="500" height="1" fill="url(#lineGrad)" opacity="0.4"/>
-  <!-- Version badge left -->
-  <rect x="30" y="90" width="60" height="20" rx="4" fill="#38bdf8" opacity="0.1" stroke="#38bdf8" stroke-width="0.5" stroke-opacity="0.4"/>
-  <text x="60" y="104" font-family="'Courier New', monospace" font-size="9" text-anchor="middle" fill="#38bdf8" opacity="0.8">v1.0.0</text>
-  <!-- Badge right -->
-  <rect x="810" y="90" width="60" height="20" rx="4" fill="#c084fc" opacity="0.1" stroke="#c084fc" stroke-width="0.5" stroke-opacity="0.4"/>
-  <text x="840" y="104" font-family="'Courier New', monospace" font-size="9" text-anchor="middle" fill="#c084fc" opacity="0.8">MIT</text>
-</svg>
 
-<br />
-<br />
+<img src="https://capsule-render.vercel.app/api?type=venom&height=200&text=SkyCampus&fontSize=80&color=0:0ea5e9,50:6366f1,100:a855f7&fontColor=ffffff&stroke=ffffff&strokeWidth=1&animation=fadeIn&fontAlignY=50&desc=Your%20University%20·%20Your%20Network%20·%20Powered%20by%20AI&descSize=16&descAlignY=72&descAlign=50" width="100%" alt="SkyCampus Banner"/>
+
+<br/>
+
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&duration=3000&pause=800&color=38BDF8&center=true&vCenter=true&multiline=false&width=600&lines=🎓+AI-Powered+University+Social+Network;⚡+Real-time+Chat+%2B+Socket.IO;🤖+Study+Buddy+Matching+via+Embeddings;📄+Resume+Analyzer+powered+by+GPT-4o;🚀+Next.js+·+Node.js+·+FastAPI+·+PostgreSQL" alt="Typing SVG" />
+
+<br/>
+<br/>
+
 
 <!-- TECH BADGES -->
 [![Next.js](https://img.shields.io/badge/Next.js_14-000000?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org)
@@ -105,7 +29,7 @@
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-skycampus.vercel.app-0ea5e9?style=flat-square&labelColor=0a0f1e)](https://skycampus.vercel.app)
 [![License MIT](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square&labelColor=0a0f1e)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-818cf8?style=flat-square&labelColor=0a0f1e)](CONTRIBUTING.md)
-[![Made with ❤️](https://img.shields.io/badge/Made_with-❤️-f43f5e?style=flat-square&labelColor=0a0f1e)](https://github.com/yourname/skycampus)
+[![Made with ❤️](https://img.shields.io/badge/Made_with-❤️-f43f5e?style=flat-square&labelColor=0a0f1e)](https://github.com/aako-aakash/skycampus)
 
 <br />
 
@@ -633,7 +557,7 @@ skycampus/                          ← monorepo root
 
 ```bash
 # ── 1. Clone ──────────────────────────────────────────────────────────────
-git clone https://github.com/yourname/skycampus.git
+git clone https://github.com/aako-aakash/skycampus.git
 cd skycampus
 
 # ── 2. Automated setup ─────────────────────────────────────────────────────
@@ -816,7 +740,7 @@ Infinite query support, optimistic mutations with automatic rollback, devtools, 
 
 ```bash
 # 1. Fork and clone
-git clone https://github.com/YOUR_USERNAME/skycampus.git
+git clone https://github.com/aako-aakash/skycampus.git
 
 # 2. Create a feature branch
 git checkout -b feature/your-feature-name
@@ -877,42 +801,43 @@ Full license text: **[LICENSE](LICENSE)**
 <br />
 
 <div align="center">
+<div align="center">
 
-<!-- FOOTER SVG -->
-<svg width="700" height="80" viewBox="0 0 700 80" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="fGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:0"/>
-      <stop offset="50%" style="stop-color:#818cf8;stop-opacity:0.6"/>
-      <stop offset="100%" style="stop-color:#c084fc;stop-opacity:0"/>
-    </linearGradient>
-  </defs>
-  <rect x="0" y="0" width="700" height="1" fill="url(#fGrad)"/>
-  <text x="350" y="30" font-family="'Courier New', monospace" font-size="11"
-    text-anchor="middle" fill="#475569" letter-spacing="3">
-    BUILT WITH PRECISION · DEPLOYED WITH CONFIDENCE
-  </text>
-  <text x="350" y="52" font-family="'Courier New', monospace" font-size="10"
-    text-anchor="middle" fill="#334155" letter-spacing="2">
-    Next.js · Node.js · PostgreSQL · Redis · Socket.IO · FastAPI · sentence-transformers
-  </text>
-  <rect x="0" y="69" width="700" height="1" fill="url(#fGrad)"/>
-</svg>
 
-<br />
+## 👨‍💻 Author
+
+**Akash Kumar Saw**
+
+AI & Machine Learning Enthusiast | Software Engineer
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Aakash%20Kumar%20Saw-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/akash-kumar-saw-bb1630258/)
+
+
+<!-- FOOTER WAVE — works on GitHub -->
+<img src="https://capsule-render.vercel.app/api?type=waving&height=100&color=0:0ea5e9,50:6366f1,100:a855f7&section=footer&reversal=false" width="100%" alt="footer wave"/>
+
+<br/>
+
+**`Built with precision. Deployed with confidence.`**
+
+<br/>
+
+```
+Next.js  ·  Node.js  ·  PostgreSQL  ·  Redis  ·  Socket.IO  ·  FastAPI  ·  sentence-transformers
+```
 
 *SkyCampus — Engineering a smarter campus, one commit at a time.*
 
-<br />
+<br/>
 
-[![GitHub stars](https://img.shields.io/github/stars/yourname/skycampus?style=social)](https://github.com/yourname/skycampus)
+[![GitHub stars](https://img.shields.io/github/stars/aako-aakash/skycampus?style=social)](https://github.com/aako-aakash/skycampus)
 &nbsp;&nbsp;
-[![GitHub forks](https://img.shields.io/github/forks/yourname/skycampus?style=social)](https://github.com/yourname/skycampus/fork)
+[![GitHub forks](https://img.shields.io/github/forks/aako-aakash/skycampus?style=social)](https://github.com/aako-aakash/skycampus/fork)
 &nbsp;&nbsp;
-[![GitHub watchers](https://img.shields.io/github/watchers/yourname/skycampus?style=social)](https://github.com/yourname/skycampus)
+[![GitHub watchers](https://img.shields.io/github/watchers/aako-aakash/skycampus?style=social)](https://github.com/aako-aakash/skycampus)
 
-<br />
+<br/>
 
-⭐ **Star this repo** if it helped you learn something new
+⭐ **Star this repo** if SkyCampus helped you learn something new
 
 </div>

@@ -216,7 +216,28 @@ model AiRecommendation {
   @@index([userId, type])
 }
 
-enum Visibility     { PUBLIC PRIVATE CONNECTIONS }
-enum MemberRole     { ADMIN MODERATOR MEMBER }
-enum NotificationType { LIKE COMMENT FOLLOW MENTION COMMUNITY }
-enum RecoType       { USER POST COMMUNITY }
+enum Visibility {
+  PUBLIC
+  PRIVATE
+  CONNECTIONS
+}
+
+enum MemberRole {
+  ADMIN
+  MODERATOR
+  MEMBER
+}
+
+enum NotificationType {
+  LIKE
+  COMMENT
+  FOLLOW
+  MENTION
+  COMMUNITY
+}
+
+enum RecoType {
+  USER
+  POST
+  COMMUNITY
+}
