@@ -6,12 +6,14 @@
     "outDir": "dist",
     "rootDir": "src",
     "strict": false,
+    "noImplicitAny": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "declaration": false,
-    "sourceMap": false
+    "sourceMap": false,
+    "allowJs": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "tests"]

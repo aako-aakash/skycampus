@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 import { AppError } from '../utils/AppError'
 
+// Extend Express Request — keeps all original properties + adds userId
 export interface AuthRequest extends Request {
   userId?: string
 }
@@ -25,12 +26,16 @@ export const protect = (req: AuthRequest, _res: Response, next: NextFunction) =>
 }
 
 export const generateTokens = (userId: string) => ({
-  accessToken: jwt.sign({ userId }, process.env.JWT_ACCESS_SECRET!, {
-    expiresIn: (process.env.JWT_ACCESS_EXPIRES ?? '15m') as any,
-  }),
-  refreshToken: jwt.sign({ userId }, process.env.JWT_REFRESH_SECRET!, {
-    expiresIn: (process.env.JWT_REFRESH_EXPIRES ?? '7d') as any,
-  }),
+  accessToken: jwt.sign(
+    { userId },
+    process.env.JWT_ACCESS_SECRET!,
+    { expiresIn: (process.env.JWT_ACCESS_EXPIRES ?? '15m') as any }
+  ),
+  refreshToken: jwt.sign(
+    { userId },
+    process.env.JWT_REFRESH_SECRET!,
+    { expiresIn: (process.env.JWT_REFRESH_EXPIRES ?? '7d') as any }
+  ),
 })
 
 export const setTokenCookies = (res: Response, accessToken: string, refreshToken: string) => {
