@@ -2,19 +2,13 @@ import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 import { AppError } from '../utils/AppError'
 
-// Extend Express Request — keeps all original properties + adds userId
-export interface AuthRequest extends Request {
-  userId?: string
-}
+export type AuthRequest = Request & { userId?: string }
 
 export const protect = (req: AuthRequest, _res: Response, next: NextFunction) => {
   try {
-    const token =
-      req.cookies?.accessToken ??
-      req.headers.authorization?.replace('Bearer ', '')
-
+    const token = (req as any).cookies?.accessToken
+      ?? req.headers.authorization?.replace('Bearer ', '')
     if (!token) throw new AppError('Not authenticated', 401)
-
     const decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET!) as { userId: string }
     req.userId = decoded.userId
     next()
@@ -26,26 +20,12 @@ export const protect = (req: AuthRequest, _res: Response, next: NextFunction) =>
 }
 
 export const generateTokens = (userId: string) => ({
-  accessToken: jwt.sign(
-    { userId },
-    process.env.JWT_ACCESS_SECRET!,
-    { expiresIn: (process.env.JWT_ACCESS_EXPIRES ?? '15m') as any }
-  ),
-  refreshToken: jwt.sign(
-    { userId },
-    process.env.JWT_REFRESH_SECRET!,
-    { expiresIn: (process.env.JWT_REFRESH_EXPIRES ?? '7d') as any }
-  ),
+  accessToken: jwt.sign({ userId }, process.env.JWT_ACCESS_SECRET!, { expiresIn: '15m' as any }),
+  refreshToken: jwt.sign({ userId }, process.env.JWT_REFRESH_SECRET!, { expiresIn: '7d' as any }),
 })
 
 export const setTokenCookies = (res: Response, accessToken: string, refreshToken: string) => {
   const isProd = process.env.NODE_ENV === 'production'
-  res.cookie('accessToken', accessToken, {
-    httpOnly: true, secure: isProd, sameSite: 'strict',
-    maxAge: 15 * 60 * 1000,
-  })
-  res.cookie('refreshToken', refreshToken, {
-    httpOnly: true, secure: isProd, sameSite: 'strict',
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-  })
+  res.cookie('accessToken', accessToken, { httpOnly: true, secure: isProd, sameSite: 'strict', maxAge: 15 * 60 * 1000 })
+  res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: isProd, sameSite: 'strict', maxAge: 7 * 24 * 60 * 60 * 1000 })
 }

@@ -5,22 +5,17 @@ import { uploadToCloudinary } from '../config/cloudinary'
 
 export const getFeed = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    const r = await postService.getFeed(
-      req.userId!,
-      req.query.cursor as string | undefined,
-      req.query.limit ? parseInt(req.query.limit as string) : 10
-    )
+    const cursor = req.query.cursor as string | undefined
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : 10
+    const r = await postService.getFeed(req.userId!, cursor, limit)
     res.json({ success: true, data: r })
   } catch (e) { next(e) }
 }
 
 export const getUserPosts = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    const r = await postService.getUserPosts(
-      req.params.userId,
-      req.userId!,
-      req.query.cursor as string | undefined
-    )
+    const cursor = req.query.cursor as string | undefined
+    const r = await postService.getUserPosts(req.params.userId, req.userId!, cursor)
     res.json({ success: true, data: r })
   } catch (e) { next(e) }
 }
@@ -41,10 +36,8 @@ export const getTrending = async (_req: Request, res: Response, next: NextFuncti
 
 export const getByTag = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    const r = await postService.getByTag(
-      req.params.tag,
-      req.query.cursor as string | undefined
-    )
+    const cursor = req.query.cursor as string | undefined
+    const r = await postService.getByTag(req.params.tag, cursor)
     res.json({ success: true, data: r })
   } catch (e) { next(e) }
 }
@@ -52,9 +45,9 @@ export const getByTag = async (req: AuthRequest, res: Response, next: NextFuncti
 export const createPost = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     let imageUrl: string | undefined
-    const multerReq = req as AuthRequest & { file?: Express.Multer.File }
-    if (multerReq.file?.buffer) {
-      imageUrl = await uploadToCloudinary(multerReq.file.buffer, 'posts')
+    const file = (req as any).file
+    if (file?.buffer) {
+      imageUrl = await uploadToCloudinary(file.buffer, 'posts')
     }
     const post = await postService.createPost(req.userId!, {
       content: req.body.content,
@@ -96,10 +89,8 @@ export const getLikedBy = async (req: AuthRequest, res: Response, next: NextFunc
 
 export const getComments = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    const r = await postService.getComments(
-      req.params.postId,
-      req.query.cursor as string | undefined
-    )
+    const cursor = req.query.cursor as string | undefined
+    const r = await postService.getComments(req.params.postId, cursor)
     res.json({ success: true, data: r })
   } catch (e) { next(e) }
 }

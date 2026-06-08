@@ -4,27 +4,42 @@ import * as commentRepo from '../repositories/comment.repository'
 import * as cache from './cache.service'
 import { sendNotification } from '../sockets/notification.socket'
 import { incrTrending } from './cache.service'
-import type { CreatePostInput, UpdatePostInput, CreateCommentInput } from '../validators/post.validator'
 
-export const getFeed = async (userId: string, cursor?: string, limit=10) => {
+export const getFeed = async (userId: string, cursor?: string, limit = 10) => {
   if (!cursor) { const c = await cache.getCachedFeed(userId); if (c) return c }
   const result = await postRepo.getFeedPosts(userId, cursor, limit)
   if (!cursor) cache.cacheFeed(userId, result)
   return result
 }
 
-export const getUserPosts = (targetId: string, viewerId: string, cursor?: string, limit=10) =>
+export const getUserPosts = (targetId: string, viewerId: string, cursor?: string, limit = 10) =>
   postRepo.getUserPosts(targetId, viewerId, cursor, limit)
 
-export const getPost = (id: string, viewerId?: string) => postRepo.getPostById(id, viewerId)
+export const getPost = (id: string, viewerId?: string) =>
+  postRepo.getPostById(id, viewerId)
 
-export const createPost = async (userId: string, data: CreatePostInput) => {
-  const post = await postRepo.createPost(userId, data)
+export const createPost = async (userId: string, data: {
+  content: string
+  imageUrl?: string
+  tags?: string | string[]
+  visibility?: string
+}) => {
+  // tags might come as comma-separated string from form data
+  let tags: string[] = []
+  if (Array.isArray(data.tags)) tags = data.tags
+  else if (typeof data.tags === 'string') tags = data.tags.split(',').map((t: string) => t.trim()).filter(Boolean)
+
+  const post = await postRepo.createPost(userId, {
+    content: data.content,
+    imageUrl: data.imageUrl,
+    tags,
+    visibility: data.visibility || 'PUBLIC',
+  })
   cache.invalidateFeed(userId)
   return post
 }
 
-export const updatePost = async (id: string, userId: string, data: UpdatePostInput) => {
+export const updatePost = async (id: string, userId: string, data: any) => {
   const post = await postRepo.updatePost(id, userId, data)
   cache.invalidateFeed(userId)
   return post
@@ -39,21 +54,21 @@ export const toggleLike = async (userId: string, postId: string) => {
   const result = await likeRepo.toggleLike(userId, postId)
   if (result.liked && result.targetUserId !== userId) {
     incrTrending(postId)
-    sendNotification({ type:'LIKE', actorId:userId, targetUserId:result.targetUserId, resourceId:postId })
+    sendNotification({ type: 'LIKE', actorId: userId, targetUserId: result.targetUserId, resourceId: postId })
   }
   return { liked: result.liked }
 }
 
-export const getLikedBy  = (postId: string, cursor?: string, limit=20) => likeRepo.getLikedBy(postId, cursor, limit)
-export const getComments = (postId: string, cursor?: string, limit=20) => commentRepo.getComments(postId, cursor, limit)
+export const getLikedBy  = (postId: string, cursor?: string, limit = 20) => likeRepo.getLikedBy(postId, cursor, limit)
+export const getComments = (postId: string, cursor?: string, limit = 20) => commentRepo.getComments(postId, cursor, limit)
 export const getReplies  = (parentId: string) => commentRepo.getReplies(parentId)
 
-export const createComment = async (userId: string, postId: string, data: CreateCommentInput) => {
+export const createComment = async (userId: string, postId: string, data: any) => {
   const { comment, postOwnerId } = await commentRepo.createComment(userId, postId, data)
-  if (postOwnerId !== userId) sendNotification({ type:'COMMENT', actorId:userId, targetUserId:postOwnerId, resourceId:postId })
+  if (postOwnerId !== userId) sendNotification({ type: 'COMMENT', actorId: userId, targetUserId: postOwnerId, resourceId: postId })
   return comment
 }
 
 export const deleteComment = (id: string, userId: string) => commentRepo.deleteComment(id, userId)
 export const getTrending  = () => postRepo.getTrending(10)
-export const getByTag     = (tag: string, cursor?: string, limit=10) => postRepo.getByTag(tag, cursor, limit)
+export const getByTag     = (tag: string, cursor?: string, limit = 10) => postRepo.getByTag(tag, cursor, limit)
