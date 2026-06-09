@@ -15,14 +15,42 @@ import notificationRoutes from './routes/notification.routes'
 const app = express()
 
 app.use(helmet())
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000', credentials:true }))
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  credentials: true,
+}))
 app.use(globalLimiter)
-app.use(express.json({ limit:'10mb' }))
-app.use(express.urlencoded({ extended:true }))
+app.use(express.json({ limit: '10mb' }))
+app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 if (process.env.NODE_ENV !== 'test') app.use(morgan('dev'))
 
-app.get('/health', (_req, res) => res.json({ status:'ok', version:'1.0.0', service:'skycampus-api' }))
+// Root route — API info
+app.get('/', (_req, res) => {
+  res.json({
+    name: 'SkyCampus API',
+    version: '1.0.0',
+    status: 'running',
+    docs: 'https://github.com/aako-aakash/skycampus',
+    endpoints: {
+      health:        'GET  /health',
+      auth:          'POST /api/v1/auth/register | /api/v1/auth/login | /api/v1/auth/me',
+      posts:         'GET  /api/v1/posts',
+      users:         'GET  /api/v1/users/:id',
+      communities:   'GET  /api/v1/communities',
+      chats:         'GET  /api/v1/chats',
+      notifications: 'GET  /api/v1/notifications',
+    },
+  })
+})
+
+// Health check
+app.get('/health', (_req, res) => res.json({
+  status: 'ok',
+  version: '1.0.0',
+  service: 'skycampus-api',
+  timestamp: new Date().toISOString(),
+}))
 
 app.use('/api/v1/auth',          authRoutes)
 app.use('/api/v1/users',         userRoutes)
@@ -31,7 +59,7 @@ app.use('/api/v1/communities',   communityRoutes)
 app.use('/api/v1/chats',         chatRoutes)
 app.use('/api/v1/notifications', notificationRoutes)
 
-app.use((_req, res) => res.status(404).json({ success:false, message:'Route not found' }))
+app.use((_req, res) => res.status(404).json({ success: false, message: 'Route not found' }))
 app.use(errorHandler)
 
 export default app

@@ -1,12 +1,12 @@
 <div align="center">
 
-
+<!-- ANIMATED HEADER BANNER — works on GitHub -->
 <img src="https://capsule-render.vercel.app/api?type=venom&height=200&text=SkyCampus&fontSize=80&color=0:0ea5e9,50:6366f1,100:a855f7&fontColor=ffffff&stroke=ffffff&strokeWidth=1&animation=fadeIn&fontAlignY=50&desc=Your%20University%20·%20Your%20Network%20·%20Powered%20by%20AI&descSize=16&descAlignY=72&descAlign=50" width="100%" alt="SkyCampus Banner"/>
 
 <br/>
 
-
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&duration=3000&pause=800&color=38BDF8&center=true&vCenter=true&multiline=false&width=600&lines=🎓+AI-Powered+University+Social+Network;⚡+Real-time+Chat+%2B+Socket.IO;🤖+Study+Buddy+Matching+via+Embeddings;📄+Resume+Analyzer+powered+by+GPT-4o;🚀+Next.js+·+Node.js+·+FastAPI+·+PostgreSQL" alt="Typing SVG" />
+<!-- TYPING ANIMATION — works on GitHub -->
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=18&duration=2500&pause=800&color=38BDF8&center=true&vCenter=true&multiline=false&repeat=true&width=650&height=40&lines=AI-Powered+University+Social+Network;Real-time+Chat+powered+by+Socket.IO;Study+Buddy+Matching+via+Embeddings;Resume+Analyzer+powered+by+GPT-4o;Next.js+%C2%B7+Node.js+%C2%B7+FastAPI+%C2%B7+PostgreSQL" alt="Typing SVG" />
 
 <br/>
 <br/>
@@ -799,8 +799,6 @@ Full license text: **[LICENSE](LICENSE)**
 ---
 
 <br />
-
-
 ## 👨‍💻 Author
 
 **Akash Kumar Saw**
@@ -811,10 +809,9 @@ AI & Machine Learning Enthusiast | Software Engineer
 
 Feel free to connect with me on LinkedIn and explore my other projects.
 
+
 <div align="center">
 <div align="center">
-
-
 
 <!-- FOOTER WAVE — works on GitHub -->
 <img src="https://capsule-render.vercel.app/api?type=waving&height=100&color=0:0ea5e9,50:6366f1,100:a855f7&section=footer&reversal=false" width="100%" alt="footer wave"/>
