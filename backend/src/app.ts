@@ -14,42 +14,32 @@ import notificationRoutes from './routes/notification.routes'
 
 const app = express()
 
+// Trust Render proxy — required to prevent rate limiter ERR_ERL_UNEXPECTED_X_FORWARDED_FOR
+app.set('trust proxy', 1)
+
 app.use(helmet())
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
-  credentials: true,
-}))
+app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000', credentials: true }))
 app.use(globalLimiter)
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
-if (process.env.NODE_ENV !== 'test') app.use(morgan('dev'))
+if (process.env.NODE_ENV !== 'test') app.use(morgan('combined'))
 
-// Root route — API info
-app.get('/', (_req, res) => {
-  res.json({
-    name: 'SkyCampus API',
-    version: '1.0.0',
-    status: 'running',
-    docs: 'https://github.com/aako-aakash/skycampus',
-    endpoints: {
-      health:        'GET  /health',
-      auth:          'POST /api/v1/auth/register | /api/v1/auth/login | /api/v1/auth/me',
-      posts:         'GET  /api/v1/posts',
-      users:         'GET  /api/v1/users/:id',
-      communities:   'GET  /api/v1/communities',
-      chats:         'GET  /api/v1/chats',
-      notifications: 'GET  /api/v1/notifications',
-    },
-  })
-})
+app.get('/', (_req, res) => res.json({
+  name: 'SkyCampus API', version: '1.0.0', status: 'running',
+  endpoints: {
+    health: 'GET /health',
+    register: 'POST /api/v1/auth/register',
+    login: 'POST /api/v1/auth/login',
+    me: 'GET /api/v1/auth/me',
+    posts: 'GET /api/v1/posts',
+    communities: 'GET /api/v1/communities',
+  }
+}))
 
-// Health check
 app.get('/health', (_req, res) => res.json({
-  status: 'ok',
-  version: '1.0.0',
-  service: 'skycampus-api',
-  timestamp: new Date().toISOString(),
+  status: 'ok', version: '1.0.0', service: 'skycampus-api',
+  timestamp: new Date().toISOString()
 }))
 
 app.use('/api/v1/auth',          authRoutes)
