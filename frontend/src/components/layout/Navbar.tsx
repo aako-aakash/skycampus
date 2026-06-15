@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { Bell, Home, MessageSquare, Users, Search, LogOut, User } from 'lucide-react'
+import { Bell, Home, MessageSquare, Users, LogOut, User } from 'lucide-react'
 import { useDispatch } from 'react-redux'
 import { logoutUser } from '@/store/slices/authSlice'
 import { useAuth } from '@/hooks'
@@ -32,18 +32,10 @@ export default function Navbar() {
       <Link href="/feed" className="text-lg font-extrabold bg-gradient-to-r from-sky-500 to-indigo-500 bg-clip-text text-transparent shrink-0 mr-2">
         SkyCampus
       </Link>
-
-      {/* Search */}
-      <div className="flex-1 max-w-sm hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-        <Search size={14} className="text-slate-400" />
-        <input placeholder="Search students, posts..." className="bg-transparent text-sm flex-1 outline-none placeholder-slate-400 text-slate-700 dark:text-slate-300" />
-      </div>
-
-      {/* Nav links */}
       <div className="flex items-center gap-1 ml-auto">
         {links.map(({ href, icon: Icon, label }) => (
           <Link key={href} href={href} title={label}
-            className={`p-2 rounded-xl transition ${pathname.startsWith(href) ? 'bg-sky-50 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-300'}`}>
+            className={`p-2 rounded-xl transition ${pathname.startsWith(href) ? 'bg-sky-50 dark:bg-sky-900/30 text-sky-600 dark:text-sky-400' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800'}`}>
             <Icon size={18} />
           </Link>
         ))}

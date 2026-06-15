@@ -9,7 +9,6 @@ const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans' })
 export const metadata: Metadata = {
   title: 'SkyCampus — AI-Powered University Social Network',
   description: 'Your University. Your Network. Powered by AI.',
-  icons: { icon: '/favicon.ico' },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

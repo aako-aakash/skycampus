@@ -31,8 +31,8 @@ export default function CreatePost() {
       const fd = new FormData()
       fd.append('content', content)
       if (image) fd.append('image', image)
-      const tagArr = tags.split(',').map(t => t.trim().toLowerCase()).filter(Boolean)
-      tagArr.forEach(t => fd.append('tags', t))
+      const tagArr = tags.split(',').map((t) => t.trim().toLowerCase()).filter(Boolean)
+      tagArr.forEach((t) => fd.append('tags', t))
       await postAPI.create(fd)
       setContent(''); setImage(null); setPreview(null); setTags('')
       qc.invalidateQueries({ queryKey: ['feed'] })
@@ -48,14 +48,11 @@ export default function CreatePost() {
           {user?.name?.[0]?.toUpperCase() ?? 'U'}
         </div>
         <form onSubmit={handleSubmit} className="flex-1">
-          <textarea value={content} onChange={e => setContent(e.target.value)}
-            placeholder="What's on your mind? Share an update, question, or achievement..."
-            rows={3}
+          <textarea value={content} onChange={(e) => setContent(e.target.value)}
+            placeholder="What's on your mind?" rows={3}
             className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:border-sky-400 transition text-sm resize-none" />
-
           {preview && (
             <div className="relative mt-2 rounded-xl overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={preview} alt="preview" className="max-h-48 w-full object-cover rounded-xl" />
               <button type="button" onClick={() => { setImage(null); setPreview(null) }}
                 className="absolute top-2 right-2 p-1 bg-black/50 rounded-full text-white hover:bg-black/70 transition">
@@ -63,9 +60,9 @@ export default function CreatePost() {
               </button>
             </div>
           )}
-
           <div className="flex items-center gap-2 mt-3">
-            <input value={tags} onChange={e => setTags(e.target.value)} placeholder="Tags: ai, nodejs, react (comma separated)"
+            <input value={tags} onChange={(e) => setTags(e.target.value)}
+              placeholder="Tags: ai, react (comma separated)"
               className="flex-1 px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-700 dark:text-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-400 transition" />
             <input ref={fileRef} type="file" accept="image/*" onChange={handleImage} className="hidden" />
             <button type="button" onClick={() => fileRef.current?.click()}

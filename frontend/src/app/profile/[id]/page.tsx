@@ -1,40 +1,46 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
-import Image from 'next/image'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { userAPI } from '@/services/api'
 import { useAuth, useProfile } from '@/hooks'
 import PostCard from '@/components/feed/PostCard'
 import Navbar from '@/components/layout/Navbar'
-import { MapPin, GraduationCap, Link2, Github, Linkedin, Loader2 } from 'lucide-react'
+import { GraduationCap, Github, Linkedin, Link2, Loader2 } from 'lucide-react'
 import toast from 'react-hot-toast'
+import type { Post } from '@/types'
 
 export default function ProfilePage() {
-  const { id } = useParams<{ id: string }>()
+  const params = useParams()
+  const id = params?.id as string
   const { user: me } = useAuth()
   const qc = useQueryClient()
   const [isFollowing, setIsFollowing] = useState(false)
 
   const { data: profileData, isLoading } = useQuery({
     queryKey: ['profile', id],
-    queryFn: async () => { const { data } = await userAPI.getProfile(id); return data.data.user },
+    queryFn: async () => {
+      const { data } = await userAPI.getProfile(id)
+      return data.data.user
+    },
+    enabled: !!id,
   })
 
   const { data: postsData, fetchNextPage, hasNextPage } = useProfile(id)
-  const posts = postsData?.pages.flatMap(p => p.posts) ?? []
+  const posts: Post[] = postsData?.pages.flatMap((p: any) => p.posts ?? []) ?? []
 
   const handleFollow = async () => {
     try {
       await userAPI.toggleFollow(id)
-      setIsFollowing(prev => !prev)
+      setIsFollowing((prev) => !prev)
       qc.invalidateQueries({ queryKey: ['profile', id] })
     } catch { toast.error('Failed') }
   }
 
   if (isLoading) return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center">
-      <Navbar /><Loader2 className="animate-spin text-sky-500" size={32} />
+      <Navbar />
+      <Loader2 className="animate-spin text-sky-500" size={32} />
     </div>
   )
 
@@ -47,17 +53,13 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
       <Navbar />
       <div className="max-w-3xl mx-auto pt-14 px-4 pb-12">
-
-        {/* Cover */}
         <div className="h-40 bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600 rounded-b-2xl overflow-hidden relative">
-          {profile.coverImage && <Image src={profile.coverImage} alt="cover" fill className="object-cover" />}
+          {profile.coverImage && <img src={profile.coverImage} alt="cover" className="w-full h-full object-cover" />}
         </div>
-
-        {/* Avatar + actions */}
         <div className="flex items-end justify-between px-4 -mt-12 mb-4">
           <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-sky-400 to-indigo-500 border-4 border-white dark:border-slate-950 overflow-hidden flex items-center justify-center text-white text-3xl font-bold shadow-xl">
             {profile.profilePicture
-              ? <Image src={profile.profilePicture} alt={profile.name} width={96} height={96} className="object-cover w-full h-full" />
+              ? <img src={profile.profilePicture} alt={profile.name} className="object-cover w-full h-full" />
               : profile.name[0]}
           </div>
           <div className="flex gap-2 pb-1">
@@ -71,15 +73,16 @@ export default function ProfilePage() {
             )}
           </div>
         </div>
-
-        {/* Info */}
         <div className="card p-5 mb-6">
           <h1 className="text-xl font-bold text-slate-900 dark:text-white">{profile.name}</h1>
           <p className="text-slate-500 text-sm mb-2">@{profile.username}</p>
           {profile.bio && <p className="text-slate-600 dark:text-slate-300 text-sm mb-3">{profile.bio}</p>}
-          <div className="flex flex-wrap gap-4 text-sm text-slate-500 mb-4">
-            {profile.university && <span className="flex items-center gap-1"><GraduationCap size={14} />{profile.university}{profile.branch ? ` · ${profile.branch}` : ''}{profile.year ? ` · Year ${profile.year}` : ''}</span>}
-          </div>
+          {profile.university && (
+            <div className="flex items-center gap-1 text-sm text-slate-500 mb-4">
+              <GraduationCap size={14} />
+              <span>{profile.university}{profile.branch ? ` · ${profile.branch}` : ''}{profile.year ? ` · Year ${profile.year}` : ''}</span>
+            </div>
+          )}
           <div className="flex gap-6 text-sm mb-4">
             <span><strong className="text-slate-900 dark:text-white">{profile._count?.followers ?? 0}</strong> <span className="text-slate-500">Followers</span></span>
             <span><strong className="text-slate-900 dark:text-white">{profile._count?.following ?? 0}</strong> <span className="text-slate-500">Following</span></span>
@@ -98,11 +101,8 @@ export default function ProfilePage() {
             {links?.website  && <a href={links.website}  target="_blank" rel="noreferrer" className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition"><Link2 size={18} /></a>}
           </div>
         </div>
-
-        {/* Posts */}
         <div className="space-y-4">
-          <h2 className="font-semibold text-slate-700 dark:text-slate-300 text-sm uppercase tracking-wide px-1">Posts</h2>
-          {posts.map(post => <PostCard key={post.id} post={post} />)}
+          {posts.map((post: Post) => <PostCard key={post.id} post={post} />)}
           {hasNextPage && (
             <button onClick={() => fetchNextPage()} className="w-full py-3 text-sm text-sky-500 hover:text-sky-400 transition font-medium">Load more</button>
           )}

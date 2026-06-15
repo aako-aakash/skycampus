@@ -29,7 +29,7 @@
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-skycampus.vercel.app-0ea5e9?style=flat-square&labelColor=0a0f1e)](https://skycampus.vercel.app)
 [![License MIT](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square&labelColor=0a0f1e)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-818cf8?style=flat-square&labelColor=0a0f1e)](CONTRIBUTING.md)
-[![Made with ❤️](https://img.shields.io/badge/Made_with-❤️-f43f5e?style=flat-square&labelColor=0a0f1e)](https://github.com/aako-aakash/skycampus)
+[![Made by ]](https://github.com/aako-aakash/skycampus)
 
 <br />
 
@@ -806,10 +806,6 @@ AI & Machine Learning Enthusiast | Software Engineer
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Aakash%20Kumar%20Saw-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/aako-aakash/)
 
 Feel free to connect with me on LinkedIn and explore my other projects.
-
-
-
-
 
 <br />
 

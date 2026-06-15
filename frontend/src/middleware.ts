@@ -1,28 +1,34 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-const PUBLIC_ROUTES = ['/', '/login', '/register']
-const AUTH_ROUTES   = ['/login', '/register']
+const PUBLIC_PATHS = ['/', '/login', '/register']
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const accessToken  = request.cookies.get('accessToken')?.value
+  const token = request.cookies.get('accessToken')?.value
 
-  // Redirect authenticated users away from login/register
-  if (accessToken && AUTH_ROUTES.some(r => pathname.startsWith(r))) {
+  // Skip middleware for static files and API routes
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.includes('.')
+  ) {
+    return NextResponse.next()
+  }
+
+  // If authenticated and visiting auth pages, redirect to feed
+  if (token && (pathname === '/login' || pathname === '/register')) {
     return NextResponse.redirect(new URL('/feed', request.url))
   }
 
-  // Redirect unauthenticated users to login
-  if (!accessToken && !PUBLIC_ROUTES.includes(pathname) && !AUTH_ROUTES.some(r => pathname.startsWith(r))) {
-    const url = new URL('/login', request.url)
-    url.searchParams.set('from', pathname)
-    return NextResponse.redirect(url)
+  // If not authenticated and visiting protected pages, redirect to login
+  if (!token && !PUBLIC_PATHS.includes(pathname)) {
+    return NextResponse.redirect(new URL('/login', request.url))
   }
 
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
 }
