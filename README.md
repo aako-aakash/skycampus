@@ -797,6 +797,16 @@ Full license text: **[LICENSE](LICENSE)**
 <br />
 
 ---
+## 👨‍💻 Author
+
+**Akash Kumar Saw**
+
+AI & Machine Learning Enthusiast | Software Engineer
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Aakash%20Kumar%20Saw-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/aako-aakash/)
+
+Feel free to connect with me on LinkedIn and explore my other projects.
+
 
 <br />
 <br/>
