@@ -29,7 +29,7 @@
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-skycampus.vercel.app-0ea5e9?style=flat-square&labelColor=0a0f1e)](https://skycampus.vercel.app)
 [![License MIT](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square&labelColor=0a0f1e)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-818cf8?style=flat-square&labelColor=0a0f1e)](CONTRIBUTING.md)
-[![Made by ]](https://github.com/aako-aakash/skycampus)
+[![AAKASH]](https://github.com/aako-aakash/skycampus)
 
 <br />
 
@@ -812,8 +812,7 @@ Feel free to connect with me on LinkedIn and explore my other projects.
 <div align="center">
 <div align="center">
 
-<!-- FOOTER WAVE — works on GitHub -->
-<img src="https://capsule-render.vercel.app/api?type=waving&height=100&color=0:0ea5e9,50:6366f1,100:a855f7&section=footer&reversal=false" width="100%" alt="footer wave"/>
+
 
 <br/>
 
@@ -838,5 +837,8 @@ Next.js  ·  Node.js  ·  PostgreSQL  ·  Redis  ·  Socket.IO  ·  FastAPI  · 
 <br/>
 
 ⭐ **Star this repo** if SkyCampus helped you learn something new
+
+<!-- FOOTER WAVE — works on GitHub -->
+<img src="https://capsule-render.vercel.app/api?type=waving&height=100&color=0:0ea5e9,50:6366f1,100:a855f7&section=footer&reversal=false" width="100%" alt="footer wave"/>
 
 </div>

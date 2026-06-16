@@ -1,7 +1,5 @@
-import type { NextConfig } from 'next'
-
-const nextConfig: NextConfig = {
-  // Ignore TS and ESLint errors during build — fixes Vercel deployment
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
   images: {
@@ -10,8 +8,6 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'avatars.githubusercontent.com' },
     ],
   },
-  // Remove serverActions allowedOrigins restriction
-  experimental: {},
 }
 
-export default nextConfig
+module.exports = nextConfig
