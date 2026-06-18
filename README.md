@@ -808,11 +808,11 @@ AI & Machine Learning Enthusiast | Software Engineer
 
 Feel free to connect with me on LinkedIn and explore my other projects.
 
+
 <br />
 
 <div align="center">
 <div align="center">
-
 
 
 <br/>
@@ -842,5 +842,6 @@ Next.js  ·  Node.js  ·  PostgreSQL  ·  Redis  ·  Socket.IO  ·  FastAPI  · 
 
 <!-- FOOTER WAVE — works on GitHub -->
 <img src="https://capsule-render.vercel.app/api?type=waving&height=100&color=0:0ea5e9,50:6366f1,100:a855f7&section=footer&reversal=false" width="100%" alt="footer wave"/>
+
 
 </div>
